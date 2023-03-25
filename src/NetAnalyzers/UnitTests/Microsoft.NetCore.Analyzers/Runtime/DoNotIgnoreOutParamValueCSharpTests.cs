@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.NetCore.Analyzers.Runtime;
 using Xunit;
 using VerifyCS = Test.Utilities.CSharpCodeFixVerifier<
-    Microsoft.NetCore.Analyzers.Runtime.DoNotIgnoreOutParamValueAnalyzer,
+    Microsoft.NetCore.CSharp.Analyzers.Runtime.CSharpDoNotIgnoreOutParamValueAnalyzer,
     Microsoft.CodeAnalysis.Testing.EmptyCodeFixProvider>;
 
 namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyzers.Runtime
@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
             namespace System.Diagnostics.CodeAnalysis
             {
                 [System.AttributeUsage(System.AttributeTargets.ReturnValue | System.AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-                public class DoNotIgnoreAttribute : System.Attribute
+                internal class DoNotIgnoreAttribute : System.Attribute
                 {
                     public DoNotIgnoreAttribute() { }
                     public string Message { get; set; }
@@ -33,11 +33,11 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
 
                 class C
                 {
-                    void UnannotatedMethod(out int value) => value = 1;
+                    void UnannotatedMethod(out int outParam) => outParam = 1;
 
                     void M()
                     {
-                        UnannotatedMethod(out int value);
+                        UnannotatedMethod(out int outArg);
                     }
                 }
                 """);
@@ -51,12 +51,12 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
 
                 class C
                 {
-                    void UnannotatedMethod(out int value) => value = 1;
+                    void UnannotatedMethod(out int outParam) => outParam = 1;
 
                     void M()
                     {
-                        UnannotatedMethod(out int value);
-                        if (value != 1) throw new System.Exception();
+                        UnannotatedMethod(out int outArg);
+                        if (outArg != 1) throw new System.Exception();
                     }
                 }
                 """);
@@ -70,11 +70,29 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
 
                 class C
                 {
-                    void UnannotatedMethod(out int value) => value = 1;
+                    void UnannotatedMethod(out int outParam) => outParam = 1;
 
                     void M()
                     {
                         UnannotatedMethod(out _);
+                    }
+                }
+                """);
+        }
+
+        [Fact]
+        public async Task UnannotatedMethod_RelayedOutParamValue_NoDiagnostic()
+        {
+            await VerifyCS.VerifyAnalyzerAsync($$"""
+                {{attributeImplementationCSharp}}
+
+                class C
+                {
+                    void UnannotatedMethod(out int outParam) => outParam = 1;
+
+                    void M(out int relayedOutParam)
+                    {
+                        UnannotatedMethod(out relayedOutParam);
                     }
                 }
                 """);
@@ -88,15 +106,15 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
 
                 class C
                 {
-                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int value) => value = 1;
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int outParam) => outParam = 1;
 
                     void M()
                     {
-                        AnnotatedMethod({|#1:out int value|});
+                        AnnotatedMethod({|#1:out int outArg|});
                     }
                 }
                 """,
-                VerifyCS.Diagnostic(doNotIgnoreRule).WithLocation(1).WithArguments("value"));
+                VerifyCS.Diagnostic(doNotIgnoreRule).WithLocation(1).WithArguments("outParam"));
         }
 
         [Fact]
@@ -107,12 +125,12 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
 
                 class C
                 {
-                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int value) => value = 1;
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int outParam) => outParam = 1;
 
                     void M()
                     {
-                        AnnotatedMethod(out int value);
-                        if (value != 1) throw new System.Exception();
+                        AnnotatedMethod(out int outArg);
+                        if (outArg != 1) throw new System.Exception();
                     }
                 }
                 """);
@@ -126,11 +144,29 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
 
                 class C
                 {
-                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int value) => value = 1;
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int outParam) => outParam = 1;
 
                     void M()
                     {
                         AnnotatedMethod(out _);
+                    }
+                }
+                """);
+        }
+
+        [Fact]
+        public async Task AnnotatedMethod_RelayedOutParamValue_NoDiagnostic()
+        {
+            await VerifyCS.VerifyAnalyzerAsync($$"""
+                {{attributeImplementationCSharp}}
+
+                class C
+                {
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int outParam) => outParam = 1;
+
+                    void M(out int relayedOutParam)
+                    {
+                        AnnotatedMethod(out relayedOutParam);
                     }
                 }
                 """);
