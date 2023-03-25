@@ -2043,6 +2043,15 @@ Widening and user defined conversions are not supported with generic types.</val
   <data name="DoNotIgnoreReturnValueMessage" xml:space="preserve">
     <value>Do not ignore the return value of '{0}'</value>
   </data>
+  <data name="DoNotIgnoreOutParamValueDescription" xml:space="preserve">
+    <value>The out value from '{0}' is being ignored, but the parameter is annotated to indicate its return value should not be ignored.</value>
+  </data>
+  <data name="DoNotIgnoreOutParamValueMessage" xml:space="preserve">
+    <value>Do not ignore the out value of '{0}'</value>
+  </data>
+  <data name="DoNotIgnoreOutParamValueTitle" xml:space="preserve">
+    <value>Do not ignore out paramer value</value>
+  </data>
   <data name="DoNotIgnoreReturnValueDescription" xml:space="preserve">
     <value>The return value from '{0}' is being ignored, but the method is annotated to indicate its return value should not be ignored.</value>
   </data>

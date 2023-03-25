@@ -773,6 +773,21 @@ Widening and user defined conversions are not supported with generic types.</tar
         <target state="translated">È stata trovata una potenziale vulnerabilità di sicurezza in cui '{0}' nel metodo '{1}' può essere contaminato dalla chiave hardcoded di '{2}' nel metodo '{3}'</target>
         <note />
       </trans-unit>
+      <trans-unit id="DoNotIgnoreOutParamValueDescription">
+        <source>The out value from '{0}' is being ignored, but the parameter is annotated to indicate its return value should not be ignored.</source>
+        <target state="new">The out value from '{0}' is being ignored, but the parameter is annotated to indicate its return value should not be ignored.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotIgnoreOutParamValueMessage">
+        <source>Do not ignore the out value of '{0}'</source>
+        <target state="new">Do not ignore the out value of '{0}'</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotIgnoreOutParamValueTitle">
+        <source>Do not ignore out paramer value</source>
+        <target state="new">Do not ignore out paramer value</target>
+        <note />
+      </trans-unit>
       <trans-unit id="DoNotIgnoreReturnValueDescription">
         <source>The return value from '{0}' is being ignored, but the method is annotated to indicate its return value should not be ignored.</source>
         <target state="new">The return value from '{0}' is being ignored, but the method is annotated to indicate its return value should not be ignored.</target>

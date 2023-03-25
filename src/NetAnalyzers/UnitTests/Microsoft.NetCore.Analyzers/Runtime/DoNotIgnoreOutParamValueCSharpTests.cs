@@ -4,21 +4,20 @@ using System.Threading.Tasks;
 using Microsoft.NetCore.Analyzers.Runtime;
 using Xunit;
 using VerifyCS = Test.Utilities.CSharpCodeFixVerifier<
-    Microsoft.NetCore.Analyzers.Runtime.DoNotIgnoreReturnValueAnalyzer,
+    Microsoft.NetCore.Analyzers.Runtime.DoNotIgnoreOutParamValueAnalyzer,
     Microsoft.CodeAnalysis.Testing.EmptyCodeFixProvider>;
 
 namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyzers.Runtime
 {
-    public class DoNotIgnoreReturnValueCSharpTests
+    public class DoNotIgnoreOutParamValueCSharpTests
     {
-        private readonly DiagnosticDescriptor doNotIgnoreRule = DoNotIgnoreReturnValueAnalyzer.DoNotIgnoreReturnValueRule;
-        private readonly DiagnosticDescriptor doNotIgnoreRuleWithMessage = DoNotIgnoreReturnValueAnalyzer.DoNotIgnoreReturnValueRuleWithMessage;
+        private readonly DiagnosticDescriptor doNotIgnoreRule = DoNotIgnoreOutParamValueAnalyzer.DoNotIgnoreOutParamValueRule;
 
         private const string attributeImplementationCSharp = $$"""
             namespace System.Diagnostics.CodeAnalysis
             {
                 [System.AttributeUsage(System.AttributeTargets.ReturnValue | System.AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
-                internal class DoNotIgnoreAttribute : System.Attribute
+                public class DoNotIgnoreAttribute : System.Attribute
                 {
                     public DoNotIgnoreAttribute() { }
                     public string Message { get; set; }
@@ -27,133 +26,111 @@ namespace Microsoft.CodeAnalysis.NetAnalyzers.UnitTests.Microsoft.NetCore.Analyz
             """;
 
         [Fact]
-        public async Task UnannotatedMethod_IgnoringReturnValue_NoDiagnostic()
+        public async Task UnannotatedMethod_IgnoringOutParamValue_NoDiagnostic()
         {
             await VerifyCS.VerifyAnalyzerAsync($$"""
                 {{attributeImplementationCSharp}}
 
                 class C
                 {
-                    int UnannotatedMethod() => 1;
+                    void UnannotatedMethod(out int value) => value = 1;
 
                     void M()
                     {
-                        UnannotatedMethod();
+                        UnannotatedMethod(out int value);
                     }
                 }
                 """);
         }
 
         [Fact]
-        public async Task UnannotatedMethod_ConsumingReturnValue_NoDiagnostic()
+        public async Task UnannotatedMethod_ConsumingOutParamValue_NoDiagnostic()
         {
             await VerifyCS.VerifyAnalyzerAsync($$"""
                 {{attributeImplementationCSharp}}
 
                 class C
                 {
-                    int UnannotatedMethod() => 1;
+                    void UnannotatedMethod(out int value) => value = 1;
 
                     void M()
                     {
-                        int r = UnannotatedMethod();
+                        UnannotatedMethod(out int value);
+                        if (value != 1) throw new System.Exception();
                     }
                 }
                 """);
         }
 
         [Fact]
-        public async Task UnannotatedMethod_DiscardingReturnValue_NoDiagnostic()
+        public async Task UnannotatedMethod_DiscardingOutParamValue_NoDiagnostic()
         {
             await VerifyCS.VerifyAnalyzerAsync($$"""
                 {{attributeImplementationCSharp}}
 
                 class C
                 {
-                    int UnannotatedMethod() => 1;
+                    void UnannotatedMethod(out int value) => value = 1;
 
                     void M()
                     {
-                        _ = UnannotatedMethod();
+                        UnannotatedMethod(out _);
                     }
                 }
                 """);
         }
 
         [Fact]
-        public async Task AnnotatedMethod_IgnoringReturnValue_ProducesDiagnostic()
+        public async Task AnnotatedMethod_IgnoringOutParamValue_ProducesDiagnostic()
         {
             await VerifyCS.VerifyAnalyzerAsync($$"""
                 {{attributeImplementationCSharp}}
 
                 class C
                 {
-                    [return: System.Diagnostics.CodeAnalysis.DoNotIgnore]
-                    int AnnotatedMethod() => 1;
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int value) => value = 1;
 
                     void M()
                     {
-                        {|#1:AnnotatedMethod()|};
+                        AnnotatedMethod({|#1:out int value|});
                     }
                 }
                 """,
-                VerifyCS.Diagnostic(doNotIgnoreRule).WithLocation(1).WithArguments("C.AnnotatedMethod()"));
+                VerifyCS.Diagnostic(doNotIgnoreRule).WithLocation(1).WithArguments("value"));
         }
 
         [Fact]
-        public async Task AnnotatedMethod_IgnoringReturnValue_ProducesDiagnostic_WithMessage()
+        public async Task AnnotatedMethod_ConsumingOutParamValue_NoDiagnostic()
         {
             await VerifyCS.VerifyAnalyzerAsync($$"""
                 {{attributeImplementationCSharp}}
 
                 class C
                 {
-                    [return: System.Diagnostics.CodeAnalysis.DoNotIgnore(Message = "You need this 1")]
-                    int AnnotatedMethod() => 1;
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int value) => value = 1;
 
                     void M()
                     {
-                        {|#1:AnnotatedMethod()|};
-                    }
-                }
-                """,
-                VerifyCS.Diagnostic(doNotIgnoreRuleWithMessage).WithLocation(1).WithArguments("C.AnnotatedMethod()", "You need this 1")
-            );
-        }
-
-        [Fact]
-        public async Task AnnotatedMethod_ConsumingReturnValue_NoDiagnostic()
-        {
-            await VerifyCS.VerifyAnalyzerAsync($$"""
-                {{attributeImplementationCSharp}}
-
-                class C
-                {
-                    [return: System.Diagnostics.CodeAnalysis.DoNotIgnore]
-                    int AnnotatedMethod() => 1;
-
-                    void M()
-                    {
-                        int r = AnnotatedMethod();
+                        AnnotatedMethod(out int value);
+                        if (value != 1) throw new System.Exception();
                     }
                 }
                 """);
         }
 
         [Fact]
-        public async Task AnnotatedMethod_DiscardingReturnValue_NoDiagnostic()
+        public async Task AnnotatedMethod_DiscardingOutParamValue_NoDiagnostic()
         {
             await VerifyCS.VerifyAnalyzerAsync($$"""
                 {{attributeImplementationCSharp}}
 
                 class C
                 {
-                    [return: System.Diagnostics.CodeAnalysis.DoNotIgnore]
-                    int AnnotatedMethod() => 1;
+                    void AnnotatedMethod([System.Diagnostics.CodeAnalysis.DoNotIgnore] out int value) => value = 1;
 
                     void M()
                     {
-                        _ = AnnotatedMethod();
+                        AnnotatedMethod(out _);
                     }
                 }
                 """);
