@@ -537,6 +537,21 @@
         <target state="translated">委任のトークンの検証を常にスキップしない</target>
         <note />
       </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidDescription">
+        <source>Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</source>
+        <target state="new">Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidMessage">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidTitle">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</target>
+        <note />
+      </trans-unit>
       <trans-unit id="DoNotCallDangerousMethodsInDeserializationDescription">
         <source>Insecure Deserialization is a vulnerability which occurs when untrusted data is used to abuse the logic of an application, inflict a Denial-of-Service (DoS) attack, or even execute arbitrary code upon it being deserialized. It’s frequently possible for malicious users to abuse these deserialization features when the application is deserializing untrusted data which is under their control. Specifically, invoke dangerous methods in the process of deserialization. Successful insecure deserialization attacks could allow an attacker to carry out attacks such as DoS attacks, authentication bypasses, and remote code execution.</source>
         <target state="translated">安全でない逆シリアル化は、アプリケーションのロジックを悪用したり、サービス拒否 (DoS) 攻撃を仕掛けたり、逆シリアル化されたときに任意のコードを実行したりすることさえあるために、信頼できないデータが使用される場合に発生する脆弱性です。 悪意のあるユーザーが、自分の管理下にある信頼できないデータをアプリケーションで逆シリアル化しているときに、これらの逆シリアル化機能を悪用することがよくあります。 具体的には、逆シリアル化の過程で危険なメソッドを呼び出します。 安全でない逆シリアル化攻撃が成功すると、攻撃者は DoS 攻撃、認証回避、リモートでのコード実行などの攻撃を仕掛ける可能性があります。</target>

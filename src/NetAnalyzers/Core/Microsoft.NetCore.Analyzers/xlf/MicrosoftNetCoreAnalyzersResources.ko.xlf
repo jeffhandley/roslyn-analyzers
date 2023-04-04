@@ -537,6 +537,21 @@
         <target state="translated">대리자에서 토큰 유효성 검사를 항상 건너뛰지 마세요.</target>
         <note />
       </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidDescription">
+        <source>Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</source>
+        <target state="new">Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidMessage">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidTitle">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</target>
+        <note />
+      </trans-unit>
       <trans-unit id="DoNotCallDangerousMethodsInDeserializationDescription">
         <source>Insecure Deserialization is a vulnerability which occurs when untrusted data is used to abuse the logic of an application, inflict a Denial-of-Service (DoS) attack, or even execute arbitrary code upon it being deserialized. It’s frequently possible for malicious users to abuse these deserialization features when the application is deserializing untrusted data which is under their control. Specifically, invoke dangerous methods in the process of deserialization. Successful insecure deserialization attacks could allow an attacker to carry out attacks such as DoS attacks, authentication bypasses, and remote code execution.</source>
         <target state="translated">안전하지 않은 deserialization은 트러스트되지 않은 데이터를 사용하여 애플리케이션 논리를 남용할 때 발생하는 취약성이고, DoS(서비스 거부) 공격을 가하거나 deserialize될 때 임의의 코드를 실행하기도 합니다. 종종 악의적인 사용자가 제어하는 트리스트되지 않은 데이터를 애플리케이션에서 deserialize할 때 이러한 deserialization 기능을 사용할 수 있습니다. 특히 deserialization 과정에 위험한 메서드를 호출합니다. 안전하지 않은 deserialization 공격이 성공하면 공격자가 DoS 공격, 인증 건너뜀 및 원격 코드 실행과 같은 공격을 수행할 수 있습니다.</target>

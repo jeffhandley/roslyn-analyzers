@@ -2052,4 +2052,13 @@ Widening and user defined conversions are not supported with generic types.</val
   <data name="DoNotIgnoreReturnValueMessageCustom" xml:space="preserve">
     <value>Do not ignore the return value of '{0}': {1}</value>
   </data>
+  <data name="DoNotApplyDoNotIgnoreToVoidDescription" xml:space="preserve">
+    <value>Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</value>
+  </data>
+  <data name="DoNotApplyDoNotIgnoreToVoidMessage" xml:space="preserve">
+    <value>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</value>
+  </data>
+  <data name="DoNotApplyDoNotIgnoreToVoidTitle" xml:space="preserve">
+    <value>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</value>
+  </data>
 </root>

@@ -4241,6 +4241,26 @@
             ]
           }
         },
+        "CA2261": {
+          "id": "CA2261",
+          "shortDescription": "Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'",
+          "fullDescription": "Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.",
+          "defaultLevel": "warning",
+          "helpUri": "https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2261",
+          "properties": {
+            "category": "Usage",
+            "isEnabledByDefault": true,
+            "typeName": "DoNotApplyDoNotIgnoreToVoidAnalyzer",
+            "languages": [
+              "C#",
+              "Visual Basic"
+            ],
+            "tags": [
+              "Telemetry",
+              "EnabledRuleInAggressiveMode"
+            ]
+          }
+        },
         "CA2300": {
           "id": "CA2300",
           "shortDescription": "Do not use insecure deserializer BinaryFormatter",

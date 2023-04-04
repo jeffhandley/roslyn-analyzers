@@ -537,6 +537,21 @@
         <target state="translated">永遠不要在委派中略過權杖驗證</target>
         <note />
       </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidDescription">
+        <source>Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</source>
+        <target state="new">Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidMessage">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidTitle">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</target>
+        <note />
+      </trans-unit>
       <trans-unit id="DoNotCallDangerousMethodsInDeserializationDescription">
         <source>Insecure Deserialization is a vulnerability which occurs when untrusted data is used to abuse the logic of an application, inflict a Denial-of-Service (DoS) attack, or even execute arbitrary code upon it being deserialized. It’s frequently possible for malicious users to abuse these deserialization features when the application is deserializing untrusted data which is under their control. Specifically, invoke dangerous methods in the process of deserialization. Successful insecure deserialization attacks could allow an attacker to carry out attacks such as DoS attacks, authentication bypasses, and remote code execution.</source>
         <target state="translated">不安全的還原序列化是一種弱點，會在有人使用未受信任的資料來不當使用應用程式的邏輯、發動拒絕服務的攻擊 (DoS)，甚至是在任何程式碼的還原序列化期間執行該程式碼時出現。惡意使用者經常會在應用程式將他們控制的未受信任資料還原序列化時，濫用這些還原序列化功能 (基本上就是在還原序列化期間叫用危險的方法)。不安全的還原序列化攻擊一旦成功，攻擊者就有機會發動後續攻擊，例如 DoS 攻擊、驗證略過和遠端程式碼執行。</target>

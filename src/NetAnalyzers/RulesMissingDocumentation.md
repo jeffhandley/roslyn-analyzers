@@ -11,3 +11,4 @@ CA1857 | <https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-
 CA1859 | <https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1859> | Use concrete types when possible for improved performance |
 CA2021 | <https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2021> | Do not call Enumerable.Cast\<T> or Enumerable.OfType\<T> with incompatible types |
 CA2022 | <https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2022> | Do not ignore return value |
+CA2261 | <https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2261> | Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}' |

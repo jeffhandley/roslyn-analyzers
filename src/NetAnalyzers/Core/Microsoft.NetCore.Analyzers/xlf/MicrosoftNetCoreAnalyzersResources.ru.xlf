@@ -537,6 +537,21 @@
         <target state="translated">Не пропускать всегда проверку токенов в делегатах</target>
         <note />
       </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidDescription">
+        <source>Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</source>
+        <target state="new">Only apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods with return values that should not be ignored. Do not apply the attribute to methods without return values.</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidMessage">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to methods without return values</target>
+        <note />
+      </trans-unit>
+      <trans-unit id="DoNotApplyDoNotIgnoreToVoidTitle">
+        <source>Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</source>
+        <target state="new">Do not apply 'System.Diagnostics.CodeAnalysis.DoNotIgnoreAttribute' to '{0}'</target>
+        <note />
+      </trans-unit>
       <trans-unit id="DoNotCallDangerousMethodsInDeserializationDescription">
         <source>Insecure Deserialization is a vulnerability which occurs when untrusted data is used to abuse the logic of an application, inflict a Denial-of-Service (DoS) attack, or even execute arbitrary code upon it being deserialized. It’s frequently possible for malicious users to abuse these deserialization features when the application is deserializing untrusted data which is under their control. Specifically, invoke dangerous methods in the process of deserialization. Successful insecure deserialization attacks could allow an attacker to carry out attacks such as DoS attacks, authentication bypasses, and remote code execution.</source>
         <target state="translated">Небезопасная десериализация — это уязвимость, которая возникает, когда недоверенные данные используются для нарушения логики работы приложения, проведения атак типа "отказ в обслуживании" или даже для выполнения произвольного кода при его десериализации. Злоумышленники часто используют эти возможности десериализации, контролируя недоверенные данные, которые десериализуются приложением, в частности, путем вызова опасных методов в ходе десериализации. При успешном проведении атак с небезопасной десериализацией злоумышленник может провести атаки типа "отказ в обслуживании", обойти проверку подлинности и выполнить код удаленно.</target>
